@@ -21,7 +21,7 @@ submit = st.button("Predict whether the review is positive or negative")
 # Load the pickle files: tfidf file and model files. Using try except block to avoid errors
 try:
     # Loading tfidf vectorizer
-    with open(r"Restaurant Review\mtf.pkl","rb") as file1:
+    with open(r"Restaurant Review\tf.pkl","rb") as file1:
         tfidf = pickle.load(file1)
     # Loading neural network model
     with open(r"Restaurant Review\model.pkl","rb") as file2:

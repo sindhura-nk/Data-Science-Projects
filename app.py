@@ -4,6 +4,7 @@ import pickle
 import pandas as pd
 import numpy as np
 import re
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 # Build the user interface
 st.set_page_config(page_title='Restaurant Review',layout='wide')
@@ -12,7 +13,7 @@ st.set_page_config(page_title='Restaurant Review',layout='wide')
 st.title('Restaurant Review - Sindhura N')
 
 # Add inputs for user
-review_input = st.text_input("Review: ")
+review_input = st.text_input("Write your Review: ")
 
 # Add a button to predict
 submit = st.button("Predict whether the review is positive or negative")
@@ -32,12 +33,11 @@ except (pickle.PickleError, AttributeError, TypeError) as e:
 
 
 # Logic for prediction
-pattern = r'[^a-z\s]'
 # If submit button is pressed
 if submit:
     # convert the data before feeding to the model
     review_input = review_input.lower()
-    review_input = re.sub(pattern,'',review_input)
+    review_input = re.sub(r'[^a-z\s]','',review_input)
     X_new = tfidf.transform([review_input]).toarray()
     probs1 = model.predict(X_new)
     if probs1>=0.5:

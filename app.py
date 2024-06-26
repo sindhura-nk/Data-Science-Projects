@@ -21,10 +21,10 @@ submit = st.button("Predict whether the review is positive or negative")
 # Load the pickle files: tfidf file and model files. Using try except block to avoid errors
 try:
     # Loading tfidf vectorizer
-    with open(r"Restaurant Review\tf.pkl","rb") as file1:
-        tfidf = pickle.load(file1)
+    with open("Restaurant Review\\tf.pkl","rb") as file1:
+        tf = pickle.load(file1)
     # Loading neural network model
-    with open(r"Restaurant Review\model.pkl","rb") as file2:
+    with open("Restaurant Review\\model.pkl","rb") as file2:
         model = pickle.load(file2)
 except FileNotFoundError:
     st.error(f"Error: File not found.")
@@ -39,7 +39,7 @@ if submit:
     # convert the data before feeding to the model
         review_input = review_input.lower()
         review_input = re.sub(r'[^a-z\s]','',review_input)
-        X_new = tfidf.transform([review_input]).toarray()
+        X_new = tf.transform([review_input]).toarray()
         probs1 = model.predict(X_new)
 
         # Assuming probs1 is the probability of positive review

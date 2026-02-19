@@ -8,4 +8,4 @@ plotly
 nbformat
 apyori
 ipykernel
-streamlit
+streamlit>=1.23.0
